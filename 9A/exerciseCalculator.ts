@@ -1,4 +1,6 @@
-interface TargetExercise {
+import { parseArgs } from "./utils"
+
+interface ExerciseStats {
     periodLength: number
     trainingDays: number
     success: boolean
@@ -8,9 +10,8 @@ interface TargetExercise {
     average: number
 }
 
-const input = [3, 0, 2, 4.5, 0, 3, 1]
 
-const calculateExercises = (input: number[], target: number): TargetExercise => {
+const calculateExercises = (input: number[], target: number): ExerciseStats => {
     // calc training days
     let trainingDays = input.reduce((acc, curr) => {
         if (curr > 0){
@@ -50,4 +51,17 @@ const calculateExercises = (input: number[], target: number): TargetExercise => 
     }
 }
 
-console.log(calculateExercises(input, 2))
+try {
+    const { value1, value2 } = parseArgs(process.argv, 'calculateExercises')
+    console.log(calculateExercises(value2 as number[], value1))
+} catch (error) {
+    let errorMessage = 'Something went wrong.'
+
+    // narrow type of error
+    if(error instanceof Error){
+        errorMessage += ' Error ' + error.message
+    }
+
+    //log error
+    console.log(errorMessage)
+}
