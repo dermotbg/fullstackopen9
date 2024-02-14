@@ -11,7 +11,7 @@ interface ExerciseStats {
 }
 
 
-const calculateExercises = (input: number[], target: number): ExerciseStats => {
+export const calculateExercises = (input: number[], target: number): ExerciseStats => {
     // calc training days
     const trainingDays = input.reduce((acc, curr) => {
         if (curr > 0){
