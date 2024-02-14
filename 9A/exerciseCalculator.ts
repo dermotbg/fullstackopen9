@@ -1,4 +1,4 @@
-import { parseArgs } from "./utils"
+import { parseArgs } from "./utils";
 
 interface ExerciseStats {
     periodLength: number
@@ -13,30 +13,30 @@ interface ExerciseStats {
 
 const calculateExercises = (input: number[], target: number): ExerciseStats => {
     // calc training days
-    let trainingDays = input.reduce((acc, curr) => {
+    const trainingDays = input.reduce((acc, curr) => {
         if (curr > 0){
-            acc += 1
+            acc += 1;
         }
-        return acc
-    }, 0)
+        return acc;
+    }, 0);
 
     //  calc total exercise hours
-    const totalHours = input.reduce((acc,curr) => acc + curr)
+    const totalHours = input.reduce((acc,curr) => acc + curr);
 
     //  calc average
-    let averageHours = (totalHours / input.length)
+    const averageHours = (totalHours / input.length);
 
     // calc rating and define descriptions
-    let rating = 1
-    let ratingDescription = ''
+    let rating = 1;
+    let ratingDescription = '';
     if(averageHours < (target / 2)){
-        ratingDescription = 'need to do better'
+        ratingDescription = 'need to do better';
     } else if((averageHours > target / 2) && (averageHours < target)){
-        rating = 2
-        ratingDescription = 'not too bad but could be better'
+        rating = 2;
+        ratingDescription = 'not too bad but could be better';
     } else {
-        rating = 3
-        ratingDescription = 'Well done, you\'ve hit your target'
+        rating = 3;
+        ratingDescription = 'Well done, you\'ve hit your target';
     }
 
     
@@ -48,20 +48,20 @@ const calculateExercises = (input: number[], target: number): ExerciseStats => {
         ratingDescription: ratingDescription,
         target: target,
         average: averageHours
-    }
-}
+    };
+};
 
 try {
-    const { value1, value2 } = parseArgs(process.argv, 'calculateExercises')
-    console.log(calculateExercises(value2 as number[], value1))
+    const { value1, value2 } = parseArgs(process.argv, 'calculateExercises');
+    console.log(calculateExercises(value2 as number[], value1));
 } catch (error) {
-    let errorMessage = 'Something went wrong.'
+    let errorMessage = 'Something went wrong.';
 
     // narrow type of error
     if(error instanceof Error){
-        errorMessage += ' Error ' + error.message
+        errorMessage += ' Error ' + error.message;
     }
 
     //log error
-    console.log(errorMessage)
+    console.log(errorMessage);
 }
