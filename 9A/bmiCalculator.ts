@@ -1,6 +1,6 @@
 import { parseArgs } from "./utils"
 
-const calculateBmi = (height: number, weight: number): string => {
+export const calculateBmi = (height: number, weight: number): string => {
 
     // calc bmi
     const heightConverted = height / 100
