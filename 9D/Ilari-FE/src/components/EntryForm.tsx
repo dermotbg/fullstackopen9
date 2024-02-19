@@ -44,27 +44,84 @@ const EntryForm = ({ entries, setEntries }: FormProps) => {
   console.log
   return(
     <div>
+      <h2>Add new entry</h2>
       <form onSubmit={submitEntry}>
         <div>
+          Date:
           <input
+          type="date"
             value={date}
             onChange={ (event) => setDate(event.target.value) }
-            placeholder="date"
           />
           </div>
           <div>
+            Weather:
             <input
-              value={weather}
+              type="radio"
+              name="weather"
+              value="sunny"
               onChange={ (event) => setWeather(event.target.value) }
-              placeholder="weather"
             />
+            <label htmlFor="sunny">sunny</label>
+            <input
+              type="radio"
+              name="weather"
+              value="rainy"
+              onChange={ (event) => setWeather(event.target.value) }
+            />
+            <label htmlFor="rainy">rainy</label>
+            <input
+              type="radio"
+              name="weather"
+              value="cloudy"
+              onChange={ (event) => setWeather(event.target.value) }
+            />
+            <label htmlFor="cloudy">cloudy</label>
+            <input
+              type="radio"
+              name="weather"
+              value="windy"
+              onChange={ (event) => setWeather(event.target.value) }
+            />
+            <label htmlFor="windy">windy</label>
+            <input
+              type="radio"
+              name="weather"
+              value="stormy"
+              onChange={ (event) => setWeather(event.target.value) }
+            />
+            <label htmlFor="stormy">stormy</label>
           </div>
           <div>
+            Visibility: 
             <input
-              value={visibility}
+              type="radio"
+              name="visibility"
+              value="good"
               onChange={ (event) => setVisibility(event.target.value) }
-              placeholder="visibility"
             />
+            <label htmlFor="good">good</label>
+            <input
+              type="radio"
+              name="visibility"
+              value="great"
+              onChange={ (event) => setVisibility(event.target.value) }
+            />
+            <label htmlFor="great">great</label>
+            <input
+              type="radio"
+              name="visibility"
+              value="ok"
+              onChange={ (event) => setVisibility(event.target.value) }
+            />
+            <label htmlFor="ok">ok</label>
+            <input
+              type="radio"
+              name="visibility"
+              value="poor"
+              onChange={ (event) => setVisibility(event.target.value) }
+            />
+            <label htmlFor="poor">poor</label>
           </div>
           <div>
             <input
