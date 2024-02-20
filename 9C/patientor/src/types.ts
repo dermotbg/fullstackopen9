@@ -10,6 +10,12 @@ export enum Gender {
   Other = "other"
 }
 
+export enum VisitType {
+  Hospital = 'Hospital',
+  OccupationalHealthcare = 'OccupationalHealthcare',
+  HealthCheck = 'HealthCheck'
+}
+
 export interface Patient {
   id: string;
   name: string;
@@ -17,6 +23,7 @@ export interface Patient {
   gender: Gender;
   ssn?: string;
   dateOfBirth?: string;
+  entries: object[]
 }
 
-export type PatientFormValues = Omit<Patient, "id" | "entries">;
+export type PatientFormValues = Omit<Patient, "id">;

@@ -2,7 +2,7 @@ import { useState, SyntheticEvent } from "react";
 
 import {  TextField, InputLabel, MenuItem, Select, Grid, Button, SelectChangeEvent } from '@mui/material';
 
-import { PatientFormValues, Gender } from "../../types";
+import { PatientFormValues, Gender, VisitType } from "../../types";
 
 interface Props {
   onCancel: () => void;
@@ -18,12 +18,20 @@ const genderOptions: GenderOption[] = Object.values(Gender).map(v => ({
   value: v, label: v.toString()
 }));
 
+interface VisitOption {
+  value: VisitType;
+  label: string;
+}
+
+const visitOptions: VisitOption[] = Object.values(VisitType).map(v => ({ value: v, label: v.toString() }));
+
 const AddPatientForm = ({ onCancel, onSubmit }: Props) => {
   const [name, setName] = useState('');
   const [occupation, setOccupation] = useState('');
   const [ssn, setSsn] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [gender, setGender] = useState(Gender.Other);
+  const [visit, setVisit] = useState(VisitType.Hospital);
 
   const onGenderChange = (event: SelectChangeEvent<string>) => {
     event.preventDefault();
@@ -36,6 +44,17 @@ const AddPatientForm = ({ onCancel, onSubmit }: Props) => {
     }
   };
 
+  const onVisitChange = (event: SelectChangeEvent<string>) => {
+    event.preventDefault();
+    if ( typeof event.target.value === "string") {
+      const value = event.target.value;
+      const visit = Object.values(VisitType).find(v => v.toString() === value);
+      if (visit) {
+        setVisit(visit);
+      }
+    }
+  };
+
   const addPatient = (event: SyntheticEvent) => {
     event.preventDefault();
     onSubmit({
@@ -43,7 +62,8 @@ const AddPatientForm = ({ onCancel, onSubmit }: Props) => {
       occupation,
       ssn,
       dateOfBirth,
-      gender
+      gender,
+      entries: [{type: visit}]
     });
   };
 
@@ -84,6 +104,22 @@ const AddPatientForm = ({ onCancel, onSubmit }: Props) => {
           onChange={onGenderChange}
         >
         {genderOptions.map(option =>
+          <MenuItem
+            key={option.label}
+            value={option.value}
+          >
+            {option.label
+          }</MenuItem>
+        )}
+        </Select>
+        <InputLabel style={{ marginTop: 20 }}>Type of Visit</InputLabel>
+        <Select
+          label="Visit"
+          fullWidth
+          value={visit}
+          onChange={onVisitChange}
+        >
+        {visitOptions.map(option =>
           <MenuItem
             key={option.label}
             value={option.value}

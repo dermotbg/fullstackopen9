@@ -10,7 +10,12 @@ router.get('/', (_req, resp) => {
 });
 
 router.get('/:id', (req, resp) => {
-  resp.send(patientService.getPatientById(req.params.id));
+  const patient = patientService.getPatientById(req.params.id);
+  if(patient){
+    resp.send(patient);
+  } else {
+    resp.sendStatus(404);
+  }
 });
 
 router.post('/', (req, resp) => {
