@@ -1,5 +1,5 @@
 import { Patient, Gender, VisitType } from '../src/types';
-import toNewPatientEntry from '../src/utils';
+import toNewPatientEntry, { parseVisitType } from '../src/utils';
 
 const patients: Patient[] = [
   {
@@ -116,6 +116,17 @@ const patients: Patient[] = [
 const validatedPatients = patients.map(p => {
   const patient = toNewPatientEntry(p) as Patient;
   patient.id = p.id;
+  // narrow entries to array and confirm type field
+  if('entries' in p && Array.isArray(p.entries) && p.entries.every(entry => 'type' in entry)){
+    // validate all patients with entires.type with parseVisitType
+    const validateType = p.entries.every(entry => parseVisitType(entry.type));
+      if (validateType){
+        return patient;
+      }
+      else {
+        throw new Error('Invalid visit type');
+      }
+  }
   return patient;
 });
 

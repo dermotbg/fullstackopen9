@@ -26,4 +26,4 @@ export interface Patient {
   entries: object[]
 }
 
-export type PatientFormValues = Omit<Patient, "id">;
+export type PatientFormValues = Omit<Patient, "id" | "entries">;

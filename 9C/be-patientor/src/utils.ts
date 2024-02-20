@@ -1,4 +1,4 @@
-import { Entry, Gender, NewPatientEntry, VisitType } from "./types";
+import { Gender, NewPatientEntry, VisitType } from "./types";
 
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
@@ -52,11 +52,11 @@ const parseOccupation = (occupation: unknown): string => {
   return occupation;
 };
 
-const isVisitType = (type: string): type is VisitType => {
+export const isVisitType = (type: string): type is VisitType => {
   return Object.values(VisitType).map(v => v.toString()).includes(type);
 };
 
-const parseVisitType = (visit: unknown): VisitType => {
+export const parseVisitType = (visit: unknown): VisitType => {
   if(!visit || !isString(visit) || !isVisitType(visit)) {
     throw new Error('Incorrect or missing visit type');
   } 
@@ -68,21 +68,13 @@ const toNewPatientEntry = (object: unknown): NewPatientEntry => {
     throw new Error('Incorrect or missing data');
   }
   
-  if('name' in object && 'dateOfBirth' in object && 'ssn' in object && 'gender' in object && 'occupation' in object && 'entries' in object 
-    && Array.isArray(object.entries) && object.entries.every(entry => 'type' in entry)){
+  if('name' in object && 'dateOfBirth' in object && 'ssn' in object && 'gender' in object && 'occupation' in object){
     const newPatient = {
       name: parseName(object.name),
       dateOfBirth: parseDateOfBirth(object.dateOfBirth),
       ssn: parseSsn(object.ssn),
       gender: parseGender(object.gender),
       occupation: parseOccupation(object.occupation),
-      entries: object.entries.map((e: Entry) => {
-        return {
-          ...e,
-          type: parseVisitType(e.type)
-        };
-
-      })
     };
     return newPatient;
   }
