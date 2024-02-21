@@ -41,7 +41,7 @@ export interface BaseEntry {
 //HealthCheckEntry
 export enum HealthCheckRating {
   'Healthy' = 0,
-  'LowRish' = 1,
+  'LowRisk' = 1,
   'HighRisk' = 2,
   'CriticalRisk' = 3
 }

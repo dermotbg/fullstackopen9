@@ -51,7 +51,7 @@ const PatientDetailsPage = () => {
         Entries
       </Typography>
       {patient.entries.map((e: Entry) => {
-        return <EntryDetails entry={e} diagnoses={diagnoses}/>;
+        return <EntryDetails key={e.id} entry={e} diagnoses={diagnoses}/>;
       }
       )}
     </div>
