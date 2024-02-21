@@ -1,4 +1,4 @@
-import { Divider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import TransgenderIcon from '@mui/icons-material/Transgender';
@@ -10,11 +10,12 @@ import diagnosesService from "../../services/diagnoses";
 import { useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
+import EntryDetails from "../EntryDetails";
 
 const PatientDetailsPage = () => {
 
   const [patient, setPatient] = useState<Patient>();
-  const [diagnoses, setDiagnoses] = useState<Diagnosis[]>();
+  const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
   const patientId: string = String(useParams().id);
 
   useEffect(() => {
@@ -49,29 +50,10 @@ const PatientDetailsPage = () => {
       <Typography variant="h6" pt={5}>
         Entries
       </Typography>
-        {patient.entries.map((e: Entry) => {
-          return (
-            <div key={e.id}>
-              <Typography variant="body1" >Date of Visit: {e.date}</Typography>
-              <Typography variant="body1" >Notes: {e.description}</Typography>
-              <ul>
-                {e.diagnosisCodes?.map(c => {
-                  return (
-                    <li key={c}>
-                      <Typography variant="body2" >{c}: {diagnoses?.map((d) => {
-                          if (d.code === c){
-                            return d.name;
-                          }
-                        })}
-                      </Typography>
-                    </li>
-                  );
-                })}
-              </ul>
-              <Divider/>
-            </div>
-          );
-        })}
+      {patient.entries.map((e: Entry) => {
+        return <EntryDetails entry={e} diagnoses={diagnoses}/>;
+      }
+      )}
     </div>
   );
 };
