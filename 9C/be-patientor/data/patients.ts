@@ -1,5 +1,5 @@
 import { Patient, Gender, VisitType } from '../src/types';
-import toNewPatientEntry, { parseVisitType } from '../src/utils';
+import toEntries, { parseVisitType } from '../src/utils';
 
 const patients: Patient[] = [
   {
@@ -114,7 +114,7 @@ const patients: Patient[] = [
 ];
 
 const validatedPatients = patients.map(p => {
-  const patient = toNewPatientEntry(p) as Patient;
+  const patient = toEntries.toNewPatientEntry(p) as Patient;
   patient.id = p.id;
   patient.entries = p.entries;
   // narrow entries to array and confirm type field
