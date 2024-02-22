@@ -38,6 +38,8 @@ export interface BaseEntry {
   diagnosisCodes?: Array<Diagnosis['code']>
 }
 
+export type BaseEntryExId = Omit<BaseEntry, 'id'>;
+
 //HealthCheckEntry
 export enum HealthCheckRating {
   'Healthy' = 0,

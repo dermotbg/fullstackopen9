@@ -36,8 +36,8 @@ router.post('/', (req, resp) => {
 router.post('/:id/entries', (req, resp) => {
   try {
     const newEntry = toEntries.toNewEntry(req.body);
-    patientService.addEntry(newEntry, req.params.id);
-    resp.json(newEntry);
+    const updatedEntry = patientService.addEntry(newEntry, req.params.id);
+    resp.json(updatedEntry);
   }
   catch(error: unknown) {
     let errorMessage = 'Something went wrong.';

@@ -34,12 +34,15 @@ const addPatient = (entry: NewPatientEntry) => {
 
 const addEntry = (entry: NewEntry, patientId: string) => {
   const newEntry: Entry = {
-    id: id,
-    ...entry
+    ...entry,
+    id: id
   };
   const targetPatient =  patients.find(p => p.id === patientId);
-  targetPatient?.entries.push(newEntry);
-  return newEntry;
+  if(targetPatient){
+    targetPatient.entries.push(newEntry);
+    return newEntry;
+  }
+  throw new Error('Patient not found');
 };
 
 export default {

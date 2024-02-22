@@ -33,4 +33,3 @@ const addEntry = async (object: EntryFormValues) => {
 export default {
   getAll, getById, create, addEntry
 };
-
