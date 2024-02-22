@@ -4,7 +4,7 @@ import { EntryProps } from "../types";
 const BaseEntry = ({ entry, diagnoses }: EntryProps) => {
 
   return(
-        <Box key={entry.id} pt={3} pl={3}>
+        <Box key={entry.id} pl={3}>
           <Typography variant="body1" >Date of Visit: {entry.date}</Typography>
           <Typography variant="body1" >Specialist: {entry.specialist}</Typography>
           <Typography variant="body1" >Notes: {entry.description}</Typography>
