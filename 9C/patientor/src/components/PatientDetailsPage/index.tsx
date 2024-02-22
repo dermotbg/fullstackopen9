@@ -17,7 +17,7 @@ const PatientDetailsPage = () => {
 
   const [patient, setPatient] = useState<Patient>();
   const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
-  const [ formOpen, setFormOpen ] = useState(false);
+  const [formOpen, setFormOpen ] = useState(false);
   const patientId: string = String(useParams().id);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const PatientDetailsPage = () => {
       </Typography>
       
       <Button variant='contained' onClick={() => setFormOpen(!formOpen)}>Add Entry</Button>
-      <AddEntryForm visible={formOpen} />
+      <AddEntryForm visible={formOpen} setVisible={setFormOpen} patientId={patientId} patient={patient} setPatient={setPatient}/>
 
       <Typography variant="h6" pt={5}>
         Entries

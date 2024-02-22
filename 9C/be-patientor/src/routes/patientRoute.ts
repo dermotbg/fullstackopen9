@@ -36,12 +36,13 @@ router.post('/', (req, resp) => {
 router.post('/:id/entries', (req, resp) => {
   try {
     const newEntry = toEntries.toNewEntry(req.body);
+    patientService.addEntry(newEntry, req.params.id);
     resp.json(newEntry);
   }
   catch(error: unknown) {
     let errorMessage = 'Something went wrong.';
     if(error instanceof Error){
-      errorMessage += ' Error ' + error.message;
+      errorMessage += ' Error: ' + error.message;
     }
     resp.status(400).send(errorMessage);
   }
