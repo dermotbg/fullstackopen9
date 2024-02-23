@@ -4,6 +4,7 @@ import { SyntheticEvent, useState } from "react";
 import patientService from '../../../services/patients';
 import axios from "axios";
 import BaseEntryFields from "./BaseEntryFields";
+import HealthCheckFields from "./HealthCheckFields";
 
 interface FormProps {
   visible: boolean;
@@ -108,7 +109,7 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
         <form onSubmit={(event) => submitEntry(event)}>
           <BaseEntryFields formProps={formProps}/>
         {/* TODO: add loadable components for each individual visit type & type selector */}
-          <TextField id="healthCheck-rating-field" label="HealthCheck Rating" variant="standard" fullWidth={true} margin="normal" size='small' type="number" value={healthCheckRating} onChange={(e) => setHealthCheckRating(Number(e.target.value))}/>
+          <HealthCheckFields healthCheckRating={healthCheckRating} setHealthCheckRating={setHealthCheckRating}/>
 
           <Button variant="contained" type="submit" sx={{ margin: '10px' }} size="medium">Save</Button>
           <Button variant="contained" sx={{ margin: '10px' }} size="medium" color="error" onClick={() => cancelForm()}>Cancel</Button>
