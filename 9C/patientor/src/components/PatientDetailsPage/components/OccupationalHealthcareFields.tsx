@@ -37,15 +37,16 @@ const OccupationalHealthcareFields = (props: occupationalProps) => {
         value={props.employer} 
         onChange={(e) => props.setEmployer(e.target.value)}
       />
-      <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'} pt={1} pb={1}>
+      <Typography sx={{ color: '#666666' }} pt={3} pb={1} >Sick Leave:</Typography>
+      <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'} pb={1}>
 
         <label htmlFor="start">
-          <Typography sx={{ color: '#666666' }} >Start date:</Typography>
+          <Typography pl={2} variant="body2">Start date:</Typography>
         </label>
         <input style={dateInputProps} id="start" type="date" name="startDate" onChange={(event) => dateChange(event)}/>
 
         <label htmlFor="end">
-          <Typography sx={{ color: '#666666' }} >End date:</Typography>
+          <Typography variant="body2" >End date:</Typography>
         </label>
         <input style={dateInputProps} id="end" type="date" name="endDate" min={min} onChange={(event) => dateChange(event)}/>
         
