@@ -24,7 +24,7 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
   const [date, setDate] = useState('');
   const [specialist, setSpecialist] = useState('');
   const [diagnosisCodes, setDiagnosisCodes] = useState<string[]>([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string>();
   const [visitType, setVisitType] = useState('HealthCheck');
   
   const [healthCheckRating, setHealthCheckRating] = useState<number>(0);
@@ -89,12 +89,21 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
           const message = e.response.data.replace('Error: ', '');
           console.error(message);
           setError(message);
+          setTimeout(() => {
+            setError(undefined);
+          }, 3000);
         } else {
           setError("Unrecognized axios error");
+          setTimeout(() => {
+            setError(undefined);
+          }, 3000);
         }
       } else {
         console.error("Unknown error", e);
         setError("Unknown error");
+        setTimeout(() => {
+          setError(undefined);
+        }, 3000);
       }
     }
   };
@@ -134,9 +143,8 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
 
   return (
     <div style={{ display: formOpen }}>
-      {/* TODO: Timeout this error notification */}
-      {error 
-        ? <Alert severity="error">{error}</Alert>
+      {error
+        ? <Alert sx={{ marginTop: '10px' }} severity="error">{error}</Alert>
         : null
       }
       <Paper elevation={10} sx={{ borderRadius: '10px', padding: '4%', border: 'solid 1px', marginTop: '10px' }}>
