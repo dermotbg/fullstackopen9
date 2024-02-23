@@ -53,7 +53,7 @@ export interface HealthCheckEntry extends BaseEntry {
 }
 
 // OccupationalHealthcareEntry
-export type sickLeave = {
+export type SickLeave = {
   startDate: string;
   endDate: string;
 };
@@ -61,7 +61,7 @@ export type sickLeave = {
 export interface OccupationalHealthcareEntry extends BaseEntry {
   type: VisitType.OccupationalHealthcare;
   employerName: string;
-  sickLeave?: sickLeave;
+  sickLeave?: SickLeave;
 }
 
 //HospitalEntry
@@ -80,3 +80,4 @@ export type Entry = | HospitalEntry | OccupationalHealthcareEntry | HealthCheckE
 type UnionOmit<T, K extends string | number | symbol> = T extends unknown ? Omit<T, K> : never;
 
 export type EntryFormValues = UnionOmit<Entry, 'id'> & { userId: string };
+export type BaseFormValues = UnionOmit<Entry, 'type' | 'id' | 'healthCheckRating'>;
