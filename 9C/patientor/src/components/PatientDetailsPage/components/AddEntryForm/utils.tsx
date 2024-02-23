@@ -1,4 +1,4 @@
-import { BaseFormValues, Discharge, EntryFormValues, VisitType, SickLeave } from "../../types";
+import { BaseFormValues, Discharge, EntryFormValues, VisitType, SickLeave } from "../../../../types";
 
 export const dateInputProps = {
   fontFamily: 'Roboto, Helvetica, Arial , sans-serif',

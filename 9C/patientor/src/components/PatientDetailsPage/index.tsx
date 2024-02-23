@@ -26,7 +26,7 @@ const PatientDetailsPage = () => {
       setPatient(patient);
     };
     void fetchCurrentPatient(patientId);
-  },[]);
+  },[patientId]);
 
   useEffect(() => {
     const fetchDiagnoses = async () => {

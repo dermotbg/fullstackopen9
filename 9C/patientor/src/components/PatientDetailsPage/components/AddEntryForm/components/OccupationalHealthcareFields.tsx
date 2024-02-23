@@ -1,5 +1,5 @@
 import { Box, TextField, Typography } from "@mui/material";
-import { SickLeave } from "../../../types";
+import { SickLeave } from "../../../../../types";
 import { ChangeEvent, useState } from "react";
 import { dateInputProps } from "../utils";
 

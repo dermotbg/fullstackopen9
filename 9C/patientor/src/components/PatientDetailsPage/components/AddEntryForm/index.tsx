@@ -1,13 +1,13 @@
 import { Alert, Button, InputLabel, MenuItem, Paper, Select,Typography } from "@mui/material";
-import { BaseFormValues, EntryFormValues, Patient, SickLeave } from "../../../types";
+import { BaseFormValues, EntryFormValues, Patient, SickLeave } from "../../../../types";
 import { SyntheticEvent, useState } from "react";
-import patientService from '../../../services/patients';
+import patientService from '../../../../services/patients';
 import axios from "axios";
-import BaseEntryFields from "./BaseEntryFields";
-import HealthCheckFields from "./HealthCheckFields";
-import HospitalFields from "./HospitalFields";
-import OccupationalHealthcareFields from "./OccupationalHealthcareFields";
-import { generateFormData } from "../utils";
+import BaseEntryFields from "./components/BaseEntryFields";
+import HealthCheckFields from "./components/HealthCheckFields";
+import HospitalFields from "./components/HospitalFields";
+import OccupationalHealthcareFields from "./components/OccupationalHealthcareFields";
+import { generateFormData } from "./utils";
 
 interface FormProps {
   visible: boolean;
@@ -20,6 +20,7 @@ interface FormProps {
 
 const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : FormProps) => {
 
+  // base entry state
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [specialist, setSpecialist] = useState('');
@@ -27,11 +28,14 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
   const [error, setError] = useState<string>();
   const [visitType, setVisitType] = useState('HealthCheck');
   
+  //HealthCheck state
   const [healthCheckRating, setHealthCheckRating] = useState<number>(0);
 
+  //Occupational Healthcare State
   const [employer, setEmployer] = useState('');
   const [sickLeave, setSickLeave] = useState<SickLeave>({startDate: '', endDate: ''});
 
+  //Hospital State
   const [dischargeDate, setDischargeDate] = useState('');
   const [dischargeCriteria, setDischargeCriteria] = useState('');
 
@@ -40,6 +44,7 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
   const submitEntry = async (event: SyntheticEvent) => {
     event.preventDefault();
 
+    // create object with common fields
     const baseData: BaseFormValues = {
       description: description,
       date: date,
@@ -47,6 +52,7 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
       diagnosisCodes: diagnosisCodes,
     };
 
+    // extend object to extended fields
     const formData: EntryFormValues = generateFormData({
       baseData: baseData,
       visitType: visitType,
@@ -58,7 +64,6 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
     });
 
     try {
-
       const entry = await patientService.addEntry(formData);
 
       // set parent patient state to include new entry
@@ -117,7 +122,8 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
     setVisible(!visible);
   };
 
-  const formProps = {
+  // props for BaseEntryFields
+  const baseFormProps = {
     description,
     setDescription,
     date,
@@ -128,6 +134,7 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
     setDiagnosisCodes,
   };
 
+  //additional fields display function 
   const setFields = () => {
     {switch (visitType) {
       case 'Hospital':
@@ -165,7 +172,7 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
         </Select>
 
         <form onSubmit={(event) => submitEntry(event)}>
-          <BaseEntryFields formProps={formProps}/>
+          <BaseEntryFields formProps={baseFormProps}/>
           {setFields()}
           <Button variant="contained" type="submit" sx={{ margin: '10px' }} size="medium">Save</Button>
           <Button variant="contained" sx={{ margin: '10px' }} size="medium" color="error" onClick={() => cancelForm()}>Cancel</Button>

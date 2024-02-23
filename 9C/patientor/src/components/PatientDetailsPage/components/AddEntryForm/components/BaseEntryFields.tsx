@@ -1,5 +1,5 @@
 import { Box, Button, List, ListItem, MenuItem, TextField, Typography } from "@mui/material";
-import { BaseEntryExId } from "../../../types";
+import { BaseEntryExId } from "../../../../../types";
 import { useState } from "react";
 import { dateInputProps, fullDiagnosesCodes } from "../utils";
 
@@ -9,8 +9,6 @@ export interface BaseEntryFields extends BaseEntryExId {
   setSpecialist: React.Dispatch<React.SetStateAction<string>>;
   setDiagnosisCodes: React.Dispatch<React.SetStateAction<string[]>>;
 }
-
-//needs to push diag code to array 
 
 const BaseEntryFields = ({formProps}: {formProps: BaseEntryFields}) => {
 
