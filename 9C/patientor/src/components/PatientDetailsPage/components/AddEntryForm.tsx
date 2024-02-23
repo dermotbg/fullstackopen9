@@ -134,12 +134,13 @@ const AddEntryForm = ({ visible, setVisible, patientId, patient, setPatient } : 
 
   return (
     <div style={{ display: formOpen }}>
+      {/* TODO: Timeout this error notification */}
       {error 
         ? <Alert severity="error">{error}</Alert>
         : null
       }
       <Paper elevation={10} sx={{ borderRadius: '10px', padding: '4%', border: 'solid 1px', marginTop: '10px' }}>
-        <Typography variant="h5" pt={3} pb={3}> New Entry</Typography>
+        <Typography variant="h5" pb={3}> New Entry</Typography>
 
         <InputLabel id="select-visit-type">Visit Type</InputLabel>
         <Select
